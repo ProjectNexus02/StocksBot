@@ -5,7 +5,7 @@ import os
 
 class MetricsRecorder(InfluxDBClient):
     """ Generates an object for recording time series data """
-    BATCH_SIZE = 1000
+    DEFAULT_BATCH_SIZE = 1000
     _db_settings = None
 
     def __init__(self):
@@ -33,13 +33,14 @@ class MetricsRecorder(InfluxDBClient):
 
         self._database = settings["database"]
 
-    def record_metrics(self, points):
+    def record_metrics(self, points, batch_size=DEFAULT_BATCH_SIZE):
         """
         Records metrics into the database
         :param points: The points to be recorded into the database
         :type points: List of dictionaries
+        :param batch_size: (Optional) The batch size, default value is DEFAULT_BATCH_SIZE
         :returns: True if the points are successfully recorded
         :rtype: Boolean
         """
-        database = MetricsRecorder._db_settings
-        return self.write_points(points, database=database, batch_size=self.BATCH_SIZE)
+        database = MetricsRecorder._db_settings["database"]
+        return self.write_points(points, database=database, batch_size=batch_size)
