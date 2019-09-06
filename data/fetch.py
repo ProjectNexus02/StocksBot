@@ -4,7 +4,6 @@ import requests
 import yaml
 import os
 import re
-import json
 
 
 class DataFetcher:
