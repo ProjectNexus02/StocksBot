@@ -36,6 +36,13 @@ class MetricsRecorder(InfluxDBClient):
     def record_metrics(self, points, batch_size=DEFAULT_BATCH_SIZE):
         """
         Records metrics into the database
+
+        Each point must follow this schema:
+        {"measurement": "measurement",
+         "time": "time",
+         "fields": {"key1": "val1", "key2": "val2", ...}
+        }
+
         :param points: The points to be recorded into the database
         :type points: List of dictionaries
         :param batch_size: (Optional) The batch size, default value is DEFAULT_BATCH_SIZE
