@@ -1,4 +1,4 @@
 influxdb==5.2.3
 python==3.7.3
-requests==2.21.0
+requests==2.31.0
 yaml==0.1.7
